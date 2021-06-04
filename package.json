@@ -1,0 +1,33 @@
+{
+  "name": "gwl002.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "generate": "next build && next export",
+    "publish": "git subtree split -P out -b publish && git push origin publish -f"
+  },
+  "dependencies": {
+    "next": "^10.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-use": "^17.2.4",
+    "rxjs": "^7.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwl002/gwl002.github.io.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "gwl002",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gwl002/gwl002.github.io/issues"
+  },
+  "homepage": "https://github.com/gwl002/gwl002.github.io#readme"
+}
