@@ -7,6 +7,7 @@ export default function HomePage() {
         <div>
             <h2>gwl002.github.io</h2>
             <Link href="/greedySnake">贪吃蛇小游戏</Link>
+            <a href="https://www.baidu.com">百度一下，你就知道</a>
         </div>
     )
 }
