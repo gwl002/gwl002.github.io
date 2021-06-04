@@ -9,6 +9,17 @@ body,
     margin: 0;
 }
 
+/* 移动端禁止滑动 */
+html,
+body {
+    overflow-x: hidden;
+    /* 禁止安卓chrome下拉刷新 */
+    overscroll-behavior-y: contain;
+}
+body {
+    position: relative;
+}
+
 .container {
     width: 600px;
     height: 100%;
