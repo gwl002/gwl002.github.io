@@ -1,6 +1,6 @@
 import React, { useState, useEffect, memo, } from "react";
 import { interval, of, merge, fromEvent, NEVER, BehaviorSubject, combineLatest, Subject, asyncScheduler } from "rxjs";
-import { map, filter, scan, startWith, switchMap, tap, withLatestFrom, pluck, distinctUntilChanged, takeWhile, shareReplay } from "rxjs/operators";
+import { map, filter, scan, startWith, switchMap, tap, withLatestFrom, pluck, distinctUntilChanged, takeWhile, shareReplay, takeUntil, takeLast } from "rxjs/operators";
 import { useMeasure } from "react-use";
 import Head from "next/head";
 
@@ -57,12 +57,42 @@ const App = () => {
     const createGame = () => {
         const gameOver$ = new BehaviorSubject(false);
 
-        const dir$ = fromEvent(document, "keydown").pipe(
+        const keyDir$ = fromEvent(document, "keydown").pipe(
             pluck("key"),
             filter((key) => KEY_EVENTS_DIR.includes(key)),
             startWith("ArrowRight"),
             distinctUntilChanged(),
         );
+
+        const gestureDir$ = function () {
+            if ('ontouchstart' in document.documentElement) {
+                return fromEvent(document, "touchstart").pipe(
+                    switchMap((startEvent) =>
+                        fromEvent(document, "touchmove").pipe(
+                            takeUntil(fromEvent(document, "touchend")),
+                            takeLast(1),
+                            map((event) => {
+                                let deltaX = event.touches[0].pageX - startEvent.touches[0].pageX;
+                                let deltaY = event.touches[0].pageY - startEvent.touches[0].pageY;
+                                if (deltaX > 0 && Math.abs(deltaX) > Math.abs(deltaY)) {
+                                    return KEY_EVENTS_DIR[3];
+                                } else if (deltaX < 0 && Math.abs(deltaX) > Math.abs(deltaY)) {
+                                    return KEY_EVENTS_DIR[2];
+                                } else if (deltaY > 0 && Math.abs(deltaY) > Math.abs(deltaX)) {
+                                    return KEY_EVENTS_DIR[1];
+                                } else {
+                                    return KEY_EVENTS_DIR[0]
+                                }
+                            }),
+                        )
+                    )
+                )
+            }
+            return NEVER
+        }()
+
+
+        const dir$ = merge(keyDir$, gestureDir$);
 
         const pauseClick$ = fromEvent(document.getElementById("pauseORresume"), "click");
         const pauseKey$ = fromEvent(document, "keydown").pipe(
