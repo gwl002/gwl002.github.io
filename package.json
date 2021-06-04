@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "generate": "next build && next export",
-    "publish": "git push origin `git subtree split --prefix out develop`:publish --force"
+    "publish": "git subtree split -P out -b publish && git push origin publish -f"
   },
   "dependencies": {
     "next": "^10.0.0",
