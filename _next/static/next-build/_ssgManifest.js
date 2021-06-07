@@ -1,1 +1,1 @@
-self.__SSG_MANIFEST=new Set,self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB();
+self.__SSG_MANIFEST=new Set(["\u002Fgame","\u002F","\u002Farticle\u002F[title]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
