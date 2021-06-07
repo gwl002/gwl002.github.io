@@ -1,9 +1,9 @@
 const Lokka = require('lokka').Lokka;
 const Transport = require('lokka-transport-http').Transport;
 
-const token = process.env.API_TOKEN || "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";
+const token = process.env.API_TOKEN
 
-
+console.log(token, "======")
 //issue api copy from https://github.com/gwuhaolin/blog/blob/master/gen.js 
 const client = new Lokka({
     transport: new Transport('https://api.github.com/graphql', {
@@ -65,7 +65,6 @@ function getAllData() {
             if (!data) {
                 data = await getArticles();
             }
-            console.log(data, "====")
             return {
                 paths: data.map(article => {
                     return {

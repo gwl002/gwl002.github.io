@@ -5,23 +5,40 @@ import { getArticles } from "../utils/api";
 
 export default function HomePage(props) {
     return (
-        <div>
-            <h2>gwl002.github.io</h2>
-            <Link href="/greedySnake">贪吃蛇小游戏</Link>
-            <a href="https://www.baidu.com">百度一下，你就知道</a>
-            <a href="https://www.google.com">google</a>
-            <ul>
-                {
-                    props.urls.map(({ url, title }) => {
-                        return (
-                            <li key={url} >
-                                <a href={url}>{title}</a>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        </div>
+        <>
+            <nav>
+                <ul>
+                    <li>
+                        <Link href="/">HOME</Link>
+                    </li>
+                    <li>
+                        <Link href="/about">关于</Link>
+                    </li>
+                    <li>
+                        <Link href="/game">小游戏</Link>
+                    </li>
+                    <li>
+                        <Link href="/archives">归档</Link>
+                    </li>
+                    <li>
+                        <Link href="/tag">标签</Link>
+                    </li>
+                </ul>
+            </nav>
+            <div>
+                <ul>
+                    {
+                        props.urls.map(({ url, title }) => {
+                            return (
+                                <li key={url} >
+                                    <a href={url}>{title}</a>
+                                </li>
+                            )
+                        })
+                    }
+                </ul>
+            </div>
+        </>
     )
 }
 
