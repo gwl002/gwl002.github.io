@@ -210,23 +210,26 @@ const App = () => {
 
 
     return (
-        <div className="container" ref={ref}>
+        <>
             <Head>
                 <link rel="stylesheet" href="/styles/greedySnake.css" />
             </Head>
-            <Board winWidth={width} size={size} isGameOver={state.isGameOver} />
-            <Snake itemWidth={itemWidth} data={state.snake} />
-            <Food itemWidth={itemWidth} food={state.food} />
-            <div>
-                <button id="pauseORresume">{
-                    state.isPaused ? "START" : "PAUSE"
-                }</button>
+            {width > 0 ? null : <Loading />}
+            <div className="container" ref={ref} style={{ visibility: width > 0 ? "visible" : "hidden" }}>
+                <Board winWidth={width} size={size} isGameOver={state.isGameOver} />
+                <Snake itemWidth={itemWidth} data={state.snake} />
+                <Food itemWidth={itemWidth} food={state.food} />
+                <div>
+                    <button id="pauseORresume">{
+                        state.isPaused ? "START" : "PAUSE"
+                    }</button>
+                </div>
+                <div>
+                    <button id="reset">reset</button>
+                </div>
+                <span>{state.score}</span>
             </div>
-            <div>
-                <button id="reset">reset</button>
-            </div>
-            <span>{state.score}</span>
-        </div>
+        </>
     )
 }
 
@@ -308,5 +311,11 @@ const Board = memo(({ winWidth, size, isGameOver }) => {
         </div>
     )
 })
+
+const Loading = () => {
+    return (
+        <div className="loading">Loading...</div>
+    )
+}
 
 export default App;
