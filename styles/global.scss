@@ -34,3 +34,33 @@ h6 {
     margin: 0;
     padding: 0;
 }
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    width: 970px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 992px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+}

@@ -1,23 +1,17 @@
-import Head from 'next/head'
+
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import Link from "next/link"
 import { getArticles } from "../utils/api";
+import PostList from "../components/home/PostList";
+import Sidebar from "../components/home/Sidebar";
 
 export default function HomePage(props) {
     return (
         <>
-            <div>
-                <ul>
-                    {
-                        props.urls.map(({ url, title }) => {
-                            return (
-                                <li key={url} >
-                                    <a href={url}>{title}</a>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
+            <div className="container">
+                <div className="row">
+                    <PostList list={props.list} />
+                    <Sidebar />
+                </div>
             </div>
         </>
     )
@@ -28,10 +22,11 @@ export async function getStaticProps({ params }) {
     let reuslt = await getArticles();
     return {
         props: {
-            urls: reuslt.map(article => {
+            list: reuslt.map(article => {
                 return {
                     title: article.title,
-                    url: "/article/" + article.title
+                    url: "/article/" + article.title,
+                    ...article
                 }
             }),
             title: "暮天云光",

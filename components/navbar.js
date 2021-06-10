@@ -10,6 +10,18 @@ export default function NavBar(props) {
         setShowNav(showNav => !showNav);
     }
 
+    const handleClick = useCallback((e) => {
+        setShowNav(false);
+    }, [])
+
+    useEffect(() => {
+        if (showNav) {
+            window.document.addEventListener("click", handleClick)
+        } else {
+            window.document.removeEventListener("click", handleClick)
+        }
+    }, [showNav])
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.containerFluid}>

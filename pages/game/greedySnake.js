@@ -215,7 +215,7 @@ const App = () => {
                 <link rel="stylesheet" href="/styles/greedySnake.css" />
             </Head>
             {width > 0 ? null : <Loading />}
-            <div className="container" ref={ref} style={{ visibility: width > 0 ? "visible" : "hidden" }}>
+            <div className="snakeGame" ref={ref} style={{ visibility: width > 0 ? "visible" : "hidden" }}>
                 <Board winWidth={width} size={size} isGameOver={state.isGameOver} />
                 <Snake itemWidth={itemWidth} data={state.snake} />
                 <Food itemWidth={itemWidth} food={state.food} />

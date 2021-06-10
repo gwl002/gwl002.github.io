@@ -7,14 +7,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 417px;
+    margin-bottom: 20px;
 }
 
 .siteHeading {
     width: 100%;
     text-align: center;
+    padding: 150px 0;
     h1 {
-        font-size: 80px;
+        font-size: 70px;
         font-weight: 700;
         color: white;
     }
@@ -29,5 +30,14 @@
         font-weight: 300;
         margin: 10px 0 0;
         color: #fff;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .siteHeading {
+        padding: 90px 0 70px;
+        h1 {
+            font-size: 40px;
+        }
     }
 }
