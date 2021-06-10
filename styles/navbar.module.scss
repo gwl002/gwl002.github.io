@@ -1,0 +1,112 @@
+.navbar {
+    border: none;
+    background: 0 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    line-height: 1.7;
+    border-bottom: 1px solid #00000000;
+    min-height: 60px;
+    a {
+        color: #fff;
+        font-weight: 800;
+        text-decoration: none;
+        background-color: transparent;
+        &:hover {
+            color: #ccc;
+        }
+    }
+}
+
+.containerFluid {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    height: 60px;
+}
+
+.navbarHeader {
+    font-size: 18px;
+}
+
+.nav {
+    display: flex;
+    margin-right: -15px;
+    li {
+        list-style: none;
+        a {
+            padding: 16px;
+            text-transform: uppercase;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: 1px;
+        }
+    }
+}
+
+.navToggle {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .nav {
+        display: block;
+        position: absolute;
+        right: 35px;
+        top: 60px;
+        width: 170px;
+        overflow: hidden;
+        // height: 0;
+        padding: 10px 0px;
+        background-color: white;
+        box-shadow: rgb(0 0 0 / 12%) 0 1px 6px, rgb(0 0 0 / 24%) 0 1px 4px;
+        border-radius: 2px;
+        transform: scale(0);
+        transform-origin: top right;
+        li a {
+            display: inline-block;
+            color: #777;
+            font-size: 13px;
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+    .nav.in {
+        transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+        height: auto;
+        transform: scale(1);
+    }
+    .navToggle {
+        display: block;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: 12px;
+        cursor: pointer;
+        margin-right: -10px;
+        &:focus {
+            outline: none;
+        }
+        &:active {
+            opacity: 0.5;
+        }
+        .iconBar {
+            width: 18px;
+            border-radius: 0;
+            background-color: #fff;
+            height: 2px;
+            display: block;
+            user-select: none;
+        }
+        .iconBar.mid {
+            margin: 3px 0;
+        }
+    }
+}

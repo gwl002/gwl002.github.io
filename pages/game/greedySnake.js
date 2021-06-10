@@ -318,4 +318,6 @@ const Loading = () => {
     )
 }
 
+App.layout = "none";
+
 export default App;
