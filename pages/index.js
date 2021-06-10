@@ -6,25 +6,6 @@ import { getArticles } from "../utils/api";
 export default function HomePage(props) {
     return (
         <>
-            <nav>
-                <ul>
-                    <li>
-                        <Link href="/">HOME</Link>
-                    </li>
-                    <li>
-                        <Link href="/about">关于</Link>
-                    </li>
-                    <li>
-                        <Link href="/game">小游戏</Link>
-                    </li>
-                    <li>
-                        <Link href="/archives">归档</Link>
-                    </li>
-                    <li>
-                        <Link href="/tag">标签</Link>
-                    </li>
-                </ul>
-            </nav>
             <div>
                 <ul>
                     {
@@ -52,7 +33,9 @@ export async function getStaticProps({ params }) {
                     title: article.title,
                     url: "/article/" + article.title
                 }
-            })
+            }),
+            title: "暮天云光",
+            subTitle: "工作经验、学习笔记、兴趣爱好"
         },
     }
 }

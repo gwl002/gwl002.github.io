@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
-import Link from "next/link"
 
 export default function HomePage(props) {
     return (
         <>
-            <ul>
-                <li>
-                    <Link href="/game/greedySnake">贪吃蛇</Link>
-                </li>
-            </ul>
+            <div>
+
+            </div>
         </>
     )
 }
@@ -17,8 +14,8 @@ export default function HomePage(props) {
 export async function getStaticProps({ params }) {
     return {
         props: {
-            title: "小游戏",
-            subTitle: "一些demo展示"
+            title: "归档",
+            subTitle: "历年的文章"
         },
     }
 }

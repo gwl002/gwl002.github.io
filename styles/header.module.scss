@@ -1,0 +1,33 @@
+.header {
+    background: no-repeat center center;
+    background-color: gray;
+    background-attachment: scroll;
+    background-size: cover;
+    background-image: url(../public/images/bg.jpeg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 417px;
+}
+
+.siteHeading {
+    width: 100%;
+    text-align: center;
+    h1 {
+        font-size: 80px;
+        font-weight: 700;
+        color: white;
+    }
+    span {
+        font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti,
+            "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN",
+            "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+        line-height: 1.7;
+        font-size: 18px;
+        line-height: 1.1;
+        display: block;
+        font-weight: 300;
+        margin: 10px 0 0;
+        color: #fff;
+    }
+}
