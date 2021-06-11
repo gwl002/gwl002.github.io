@@ -32,9 +32,9 @@ export default function Article(props) {
 
 
 export async function getStaticPaths() {
-    let data = await getArticles();
+    let { issues } = await getArticles();
     return {
-        paths: data.map(article => {
+        paths: issues.map(article => {
             return {
                 params: {
                     title: article.title
@@ -47,8 +47,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     let title = params.title;
-    let data = await getArticles();
-    let props = data.find(article => article.title === title)
+    let { issues } = await getArticles();
+    let props = issues.find(article => article.title === title)
     return {
         props,
     }

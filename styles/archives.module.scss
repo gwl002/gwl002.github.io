@@ -1,0 +1,28 @@
+.archivePage {
+    padding: 0 5% 0 8%;
+}
+
+.groupItem {
+    list-style: none;
+}
+
+.postList {
+    list-style-type: disc;
+    margin-left: 1.5em;
+    li a {
+        color: #0085a1;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.yearIcon {
+    color: #0085a1;
+    font-size: 20px;
+    line-height: 2;
+}
+
+.yearText {
+    margin-left: 10px;
+}
