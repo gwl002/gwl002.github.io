@@ -11,7 +11,13 @@ export default function PostItem(props) {
     return (
         <>
             <li className={styles.postItem} >
-                <Link href={url} getStaticProps={true}>
+                <Link
+                    // href={url}
+                    href={{
+                        pathname: '/article/[title]',
+                        query: { title: title },
+                    }}
+                >
                     <a >
                         <h2 className={styles.postTitle}>
                             {title}
