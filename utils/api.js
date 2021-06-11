@@ -58,36 +58,5 @@ export async function getArticles(title) {
 }
 
 
-function getAllData() {
-    let data = null;
-    return {
-        getStaticPaths: async function () {
-            if (!data) {
-                data = await getArticles();
-            }
-            return {
-                paths: data.map(article => {
-                    return {
-                        params: {
-                            title: article.title
-                        }
-                    }
-                }),
-                fallback: false
-            }
-        },
-        getStaticProps: async function ({ params }) {
-            let title = params.title;
-            if (!data) {
-                data = await getArticles();
-            }
-            let props = data.find(article => article.title === title)
-            return {
-                props,
-            }
-        }
-    }
-}
 
 
-export default getAllData

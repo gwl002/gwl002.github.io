@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { getArticles } from "../utils/api";
 import PostList from "../components/home/PostList";
 import Sidebar from "../components/home/Sidebar";
+import Link from "next/link";
 
 export default function HomePage(props) {
     return (
