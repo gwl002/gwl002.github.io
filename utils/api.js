@@ -3,7 +3,6 @@ const Transport = require('lokka-transport-http').Transport;
 
 const token = process.env.API_TOKEN
 
-console.log(token, "======")
 //issue api copy from https://github.com/gwuhaolin/blog/blob/master/gen.js 
 const client = new Lokka({
     transport: new Transport('https://api.github.com/graphql', {
@@ -19,7 +18,7 @@ export async function getArticles(title) {
         let result = await client.query(`
             {
                 repository(owner: "gwl002", name: "gwl002.github.io") {
-                    issues(first: 1, orderBy: {field: CREATED_AT, direction: ASC}, states: [OPEN], filterBy: {createdBy: "gwl002" }) {
+                    issues(first: 100, orderBy: {field: CREATED_AT, direction: DESC}, states: [OPEN], filterBy: {createdBy: "gwl002" }) {
                         edges {
                             node {
                                 title
@@ -40,6 +39,7 @@ export async function getArticles(title) {
                 }
             }
         `)
+        console.log(result, "====")
         return result.repository.issues.edges.map((em) => {
             const { title, body, createdAt, url, labels } = em.node;
             const tags = labels.edges.map(em => em.node.name);

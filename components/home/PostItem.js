@@ -5,13 +5,13 @@ import moment from "dayjs";
 
 export default function PostItem(props) {
     let { title, subTitle, body, createdAt } = props;
-    const url = "/article/" + title;
-    const desc = removeMarkdown(body).substring(0, 400) + "......";
+    const url = "/article/" + encodeURIComponent(title);
+    const desc = removeMarkdown(body).substring(0, 400);
 
     return (
         <>
-            <li className={styles.postItem}>
-                <Link href={url}>
+            <li className={styles.postItem} >
+                <Link href={url} getStaticProps={true}>
                     <a >
                         <h2 className={styles.postTitle}>
                             {title}
@@ -20,7 +20,7 @@ export default function PostItem(props) {
                             {subTitle}
                         </h3>
                         <div className={styles.postContentPreview}>
-                            {desc}
+                            {desc.length >= 400 ? desc + "......" : desc}
                         </div>
                     </a>
                 </Link>
