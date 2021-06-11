@@ -1,9 +1,8 @@
 
-import React, { useState, useEffect, useCallback, useContext } from 'react';
-import { getArticles } from "../utils/api";
+import React from 'react';
 import PostList from "../components/home/PostList";
 import Sidebar from "../components/home/Sidebar";
-import Link from "next/link";
+import { getArticles } from "../utils/api";
 
 export default function HomePage(props) {
     return (
@@ -11,7 +10,7 @@ export default function HomePage(props) {
             <div className="container">
                 <div className="row">
                     <PostList list={props.list} />
-                    <Sidebar />
+                    <Sidebar tags={props.tags} />
                 </div>
             </div>
         </>
@@ -20,16 +19,11 @@ export default function HomePage(props) {
 
 
 export async function getStaticProps({ params }) {
-    let reuslt = await getArticles();
+    let result = await getArticles();
     return {
         props: {
-            list: reuslt.map(article => {
-                return {
-                    title: article.title,
-                    url: "/article/" + article.title,
-                    ...article
-                }
-            }),
+            list: result.issues,
+            tags: result.tags,
             title: "暮天云光",
             subTitle: "工作经验、学习笔记、兴趣爱好"
         },

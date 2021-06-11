@@ -39,12 +39,19 @@ a {
     text-decoration: none;
 }
 
+#__next {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
     width: 970px;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    overflow: hidden;
 }
 
 .row {

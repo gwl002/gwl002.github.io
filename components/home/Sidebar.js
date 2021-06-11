@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "../../styles/home.module.scss";
 
 export default function SideBar(props) {
-    const tags = ["react", "webpack", "html", "css", "nodejs"];
+    const { tags } = props;
     return (
         <div className={styles.sidebar}>
             <section>
@@ -13,7 +13,7 @@ export default function SideBar(props) {
                     {
                         tags.map((tag, index) => {
                             return (
-                                <Tag tag={tag} key={tag} />
+                                <Tag tag={tag} key={tag.name} />
                             )
                         })
                     }
@@ -26,7 +26,7 @@ export default function SideBar(props) {
 const Tag = ({ tag }) => {
     return (
         <li className={styles.tag}>
-            <Link href={`/tag/${tag}`}>{tag}</Link>
+            <Link href={`/tag#${tag.name}`}>{tag.name}</Link>
         </li>
     )
 }

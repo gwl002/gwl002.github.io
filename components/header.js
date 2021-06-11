@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
-import cn from "classnames";
+import React from 'react';
 import styles from "../styles/header.module.scss";
 
 export default function Header(props) {

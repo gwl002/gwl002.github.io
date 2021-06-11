@@ -18,6 +18,14 @@ export async function getArticles(title) {
         let result = await client.query(`
             {
                 repository(owner: "gwl002", name: "gwl002.github.io") {
+                    labels(first: 10){
+                        edges {
+                            node {
+                                name,
+                                color
+                            }
+                        }
+                    }
                     issues(first: 100, orderBy: {field: CREATED_AT, direction: DESC}, states: [OPEN], filterBy: {createdBy: "gwl002" }) {
                         edges {
                             node {
@@ -39,8 +47,8 @@ export async function getArticles(title) {
                 }
             }
         `)
-        console.log(result, "====")
-        return result.repository.issues.edges.map((em) => {
+        console.log(JSON.stringify(result))
+        const issues = result.repository.issues.edges.map((em) => {
             const { title, body, createdAt, url, labels } = em.node;
             const tags = labels.edges.map(em => em.node.name);
             return {
@@ -51,6 +59,18 @@ export async function getArticles(title) {
                 tags
             }
         })
+        const tags = result.repository.labels.edges.map((em) => {
+            let { name, color } = em.node;
+            return {
+                name,
+                color
+            };
+        })
+        return {
+            issues,
+            tags
+        }
+
     } catch (err) {
         console.log(err);
         return []

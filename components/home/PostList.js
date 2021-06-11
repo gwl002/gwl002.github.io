@@ -1,5 +1,5 @@
-import PostItem from "./PostItem";
 import styles from "../../styles/home.module.scss";
+import PostItem from "./PostItem";
 
 
 export default function PostList(props) {

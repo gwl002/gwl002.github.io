@@ -5,7 +5,7 @@ import moment from "dayjs";
 
 export default function PostItem(props) {
     let { title, subTitle, body, createdAt } = props;
-    const url = "/article/" + encodeURIComponent(title);
+    // const url = "/article/" + encodeURIComponent(title);
     const desc = removeMarkdown(body).substring(0, 400);
 
     return (
