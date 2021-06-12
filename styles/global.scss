@@ -60,6 +60,16 @@ a {
     flex-wrap: wrap;
 }
 
+.content {
+    padding-left: 8%;
+    padding-right: 5%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
 @media screen and (max-width: 992px) {
     .container {
         width: 750px;
@@ -69,5 +79,9 @@ a {
 @media screen and (max-width: 768px) {
     .container {
         width: 100%;
+    }
+    .content {
+        padding-left: 5%;
+        padding-right: 5%;
     }
 }

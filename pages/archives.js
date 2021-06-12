@@ -23,18 +23,22 @@ export default function Archives(props) {
     }, [])
     return (
         <div className="container">
-            <div className={styles.archivePage}>
-                <ul>
-                    {groups.map(group => {
-                        return (
-                            <GroupByYear
-                                year={group.year}
-                                posts={group.posts}
-                                key={group.year}
-                            />
-                        )
-                    })}
-                </ul>
+            <div className="column">
+                <div className="content">
+                    <div className={styles.archivePage}>
+                        <ul>
+                            {groups.map(group => {
+                                return (
+                                    <GroupByYear
+                                        year={group.year}
+                                        posts={group.posts}
+                                        key={group.year}
+                                    />
+                                )
+                            })}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     )
