@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import styles from "../../styles/article.module.scss";
+import Sidebar from "../../components/home/Sidebar";
 
 const components = {
     code({ node, inline, className, children, ...props }) {
@@ -17,7 +18,12 @@ const components = {
 }
 
 export default function Article(props) {
-    let { body } = props;
+    let { body, tags } = props;
+    tags = tags.map(tag => {
+        return {
+            name: tag
+        }
+    })
     return (
         <article>
             <div className="container">
@@ -30,6 +36,7 @@ export default function Article(props) {
                                 {body}
                             </ReactMarkdown>
                         </div>
+                        <Sidebar tags={tags} />
                     </div>
                 </div>
             </div >
