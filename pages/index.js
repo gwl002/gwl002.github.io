@@ -8,9 +8,11 @@ export default function HomePage(props) {
     return (
         <>
             <div className="container">
-                <div className="row">
-                    <PostList list={props.list} />
-                    <Sidebar tags={props.tags} />
+                <div className="content">
+                    <div className="row">
+                        <PostList list={props.list} />
+                        <Sidebar tags={props.tags} />
+                    </div>
                 </div>
             </div>
         </>

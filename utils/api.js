@@ -36,7 +36,8 @@ export async function getArticles(title) {
                                 labels(first: 100) {
                                     edges {
                                         node {
-                                            name
+                                            name,
+                                            color
                                         }
                                     }
                                 }

@@ -1,6 +1,5 @@
 .postList {
     list-style: none;
-    padding-left: 7%;
     padding-right: 5%;
     width: 66.7%;
     hr {
@@ -104,4 +103,7 @@
 }
 
 @media screen and (max-width: 768px) {
+    .postList {
+        padding-right: 0;
+    }
 }

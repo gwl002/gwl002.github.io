@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { getArticles } from "../../utils/api";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import styles from "../../styles/article.module.scss";
 
 const components = {
     code({ node, inline, className, children, ...props }) {
         const match = /language-(\w+)/.exec(className || '')
         return !inline && match ? (
-            <SyntaxHighlighter style={okaidia} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+            <SyntaxHighlighter style={materialOceanic} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
         ) : (
             <code className={className} {...props} />
         )
@@ -16,17 +17,23 @@ const components = {
 }
 
 export default function Article(props) {
-    let { title, body } = props;
-    console.log(props, "article")
+    let { body } = props;
     return (
-        <div>
-            <h2>{title}</h2>
-            <ReactMarkdown
-                components={components}
-            >
-                {body}
-            </ReactMarkdown>
-        </div>
+        <article>
+            <div className="container">
+                <div className="column">
+                    <div className="content">
+                        <div className={styles.article}>
+                            <ReactMarkdown
+                                components={components}
+                            >
+                                {body}
+                            </ReactMarkdown>
+                        </div>
+                    </div>
+                </div>
+            </div >
+        </article>
     )
 }
 
@@ -50,6 +57,9 @@ export async function getStaticProps({ params }) {
     let { issues } = await getArticles();
     let props = issues.find(article => article.title === title)
     return {
-        props,
+        props: {
+            ...props,
+            headType: "article"
+        }
     }
 }

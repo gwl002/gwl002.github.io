@@ -15,37 +15,42 @@ export default function HomePage(props) {
     })
     return (
         <div className="container">
-            <div className={styles.tagPage}>
-                <ul className={styles.tags}>
-                    {
-                        tags.map((tag, index) => {
-                            return (
-                                <li key={tag.name} className={styles.tag}>
-                                    <a href={"#" + tag.name} style={{ backgroundColor: `#${tag.color}` }}>{tag.name}</a>
-                                </li>
-                            )
-                        })
-                    }
-                </ul>
-                <ul>
-                    {
-                        groups.map((group) => {
-                            return (
-                                <GroupByTag
-                                    tag={group.tag}
-                                    posts={group.posts}
-                                    key={group.tag.name}
-                                />
-                            )
-                        })
-                    }
-                </ul>
+            <div className="column">
+                <div className="content">
+                    <div className={styles.tagPage}>
+                        <ul className={styles.tags}>
+                            {
+                                tags.map((tag, index) => {
+                                    return (
+                                        <li key={tag.name} className={styles.tag}>
+                                            <a href={"#" + tag.name} style={{ backgroundColor: `#${tag.color}` }}>{tag.name}</a>
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                        <ul>
+                            {
+                                groups.map((group) => {
+                                    return (
+                                        <GroupByTag
+                                            tag={group.tag}
+                                            posts={group.posts}
+                                            key={group.tag.name}
+                                        />
+                                    )
+                                })
+                            }
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     )
 }
 
 const GroupByTag = ({ tag, posts }) => {
+    if (posts.length === 0) return null
     return (
         <li>
             <span className={cn("fa", "fa-tag", styles.tagIcon)} id={tag.name}>
