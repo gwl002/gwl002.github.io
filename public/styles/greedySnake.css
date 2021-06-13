@@ -29,7 +29,7 @@ body {
     position: relative;
 }
 
-.row {
+.rowContainer {
     display: flex;
     flex-direction: row;
 }
@@ -72,7 +72,7 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-    .container {
+    .snakeGame {
         width: 100%;
     }
 }

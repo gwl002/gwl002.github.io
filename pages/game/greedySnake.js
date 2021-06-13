@@ -290,7 +290,7 @@ const Board = memo(({ winWidth, size, isGameOver }) => {
 
     const Row = ({ rowIndex }) => {
         return (
-            <div className="row">
+            <div className="rowContainer">
                 {
                     Array(size).fill().map((item, index) => (
                         <span key={index} className="boardItem" style={{ width: itemWidth, height: itemWidth }}>
