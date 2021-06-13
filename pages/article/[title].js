@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { getArticles } from "../../utils/api";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from 'rehype-raw';
+
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import styles from "../../styles/article.module.scss";
@@ -32,6 +34,7 @@ export default function Article(props) {
                         <div className={styles.article}>
                             <ReactMarkdown
                                 components={components}
+                                rehypePlugins={[rehypeRaw]}
                             >
                                 {body}
                             </ReactMarkdown>
