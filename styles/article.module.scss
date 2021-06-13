@@ -1,5 +1,6 @@
 .article {
     padding-top: 10px;
+    margin-bottom: 40px;
     p {
         margin: 30px 0;
     }
@@ -60,5 +61,16 @@
     pre {
         margin: 20px 0;
         overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .article {
+        h1 {
+            font-size: 30px;
+        }
+        h2 {
+            font-size: 28px;
+        }
     }
 }
