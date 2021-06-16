@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import Link from "next/link"
+import styles from "../../styles/game.module.scss";
 
 export default function GamePage(props) {
     return (
         <div className="container">
             <div className="column">
                 <div className="content">
-                    <ul>
+                    <ul className={styles.gameList}>
                         <li>
-                            <Link href="/game/greedySnake">贪吃蛇</Link>
+                            <Link href="/game/greedySnake">rxjs贪吃蛇</Link>
                         </li>
                     </ul>
                 </div>
