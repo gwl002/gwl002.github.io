@@ -14,10 +14,11 @@ jobs:
       with:
         persist-credentials: false
     - name: echo access token to .env.local
-      run: 'echo "API_TOKEN=$SSH_KEY" > .env.local'
+      run: 'echo "API_TOKEN=$API_TOKEN\n\rGA_TRACKING_ID=$GA_TRACKING_ID" > .env.local'
       shell: bash
       env:
-        SSH_KEY: ${{secrets.API_TOKEN}}
+        API_TOKEN: ${{secrets.API_TOKEN}}
+        GA_TRACKING_ID: ${{secrets.GA_TRACKING_ID}}
     - name: Install and Build
       run: |
         npm install
