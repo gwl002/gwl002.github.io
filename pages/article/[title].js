@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { materialOceanic } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import styles from "../../styles/article.module.scss";
 import Sidebar from "../../components/home/Sidebar";
+import { NextSeo } from 'next-seo';
 
 const components = {
     code({ node, inline, className, children, ...props }) {
@@ -27,23 +28,29 @@ export default function Article(props) {
         }
     })
     return (
-        <article>
-            <div className="container">
-                <div className="column">
-                    <div className="content">
-                        <div className={styles.article}>
-                            <ReactMarkdown
-                                components={components}
-                                rehypePlugins={[rehypeRaw]}
-                            >
-                                {body}
-                            </ReactMarkdown>
+        <>
+            <NextSeo
+                title={"暮天云光-" + props.title}
+                description={"no at this moment"}
+            />
+            <article>
+                <div className="container">
+                    <div className="column">
+                        <div className="content">
+                            <div className={styles.article}>
+                                <ReactMarkdown
+                                    components={components}
+                                    rehypePlugins={[rehypeRaw]}
+                                >
+                                    {body}
+                                </ReactMarkdown>
+                            </div>
+                            <Sidebar tags={tags} />
                         </div>
-                        <Sidebar tags={tags} />
                     </div>
-                </div>
-            </div >
-        </article>
+                </div >
+            </article>
+        </>
     )
 }
 
