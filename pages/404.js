@@ -35,7 +35,6 @@ const NotFoundPage = (props) => {
 
 }
 
-NotFoundPage.layout = "none"
-NotFoundPage.testid = "123"
+NotFoundPage.layout = "noHeader"
 
 export default NotFoundPage;

@@ -6,7 +6,7 @@ import moment from "dayjs";
 export default function PostItem(props) {
     let { title, subTitle, body, createdAt } = props;
     // const url = "/article/" + encodeURIComponent(title);
-    const desc = removeMarkdown(body).substring(0, 400);
+    const desc = removeMarkdown(body).substring(0, 150);
 
     return (
         <>
@@ -26,7 +26,7 @@ export default function PostItem(props) {
                             {subTitle}
                         </h3>
                         <div className={styles.postContentPreview}>
-                            {desc.length >= 400 ? desc + "......" : desc}
+                            {desc.length >= 150 ? desc + "......" : desc}
                         </div>
                     </a>
                 </Link>

@@ -17,11 +17,11 @@ export default function HomePage(props) {
     // }
 
     return (
-        <>
-            <div>
-
+        <div className="container">
+            <div className="column">
+                <h4 style={{ textAlign: "center" }}>暂无内容</h4>
             </div>
-        </>
+        </div>
     )
 }
 

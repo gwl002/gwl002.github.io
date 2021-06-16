@@ -1,0 +1,9 @@
+.gameList {
+    // list-style: none;
+    li a {
+        color: #404040;
+        &:hover {
+            color: #0085a1;
+        }
+    }
+}
