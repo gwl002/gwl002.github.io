@@ -14,7 +14,7 @@ jobs:
       with:
         persist-credentials: false
     - name: echo access token to .env.local
-      run: 'echo "API_TOKEN=$API_TOKEN\n\rGA_TRACKING_ID=$GA_TRACKING_ID" > .env.local'
+      run: 'echo -e "API_TOKEN=$API_TOKEN\nGA_TRACKING_ID=$GA_TRACKING_ID" > .env.local'
       shell: bash
       env:
         API_TOKEN: ${{secrets.API_TOKEN}}
