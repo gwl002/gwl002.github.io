@@ -1,6 +1,5 @@
 .article {
     padding-top: 10px;
-    margin-bottom: 40px;
     p {
         margin: 30px 0;
     }
@@ -61,6 +60,18 @@
     pre {
         margin: 20px 0;
         overflow: hidden;
+    }
+}
+
+.remark {
+    margin-bottom: 20px;
+    display: inline-block;
+    a {
+        color: #0085a1;
+        font-size: 18px;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 

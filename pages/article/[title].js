@@ -21,7 +21,7 @@ const components = {
 }
 
 export default function Article(props) {
-    let { body, tags } = props;
+    let { body, tags, url } = props;
     tags = tags.map(tag => {
         return {
             name: tag
@@ -44,7 +44,11 @@ export default function Article(props) {
                                 >
                                     {body}
                                 </ReactMarkdown>
+                                <hr />
                             </div>
+                            <strong className={styles.remark}>
+                                <a href={url}>在github上参与本文讨论</a>
+                            </strong>
                             <Sidebar tags={tags} />
                         </div>
                     </div>
