@@ -31,7 +31,16 @@ export default function Article(props) {
         <>
             <NextSeo
                 title={"暮天云光-" + props.title}
-                description={"no at this moment"}
+                description={props.description}
+                additionalMetaTags={
+                    [
+                        {
+                            property: 'keywords',
+                            name: 'keywords',
+                            content: Array.isArray(props.keywords) ? props.keywords.join(",") : ""
+                        }
+                    ]
+                }
             />
             <article>
                 <div className="container">
