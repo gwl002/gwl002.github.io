@@ -15,6 +15,7 @@
   "dependencies": {
     "classnames": "^2.3.1",
     "dayjs": "^1.10.5",
+    "front-matter": "^4.0.2",
     "lokka": "^1.7.0",
     "lokka-transport-http": "^1.6.1",
     "markdown-to-text": "^0.1.1",

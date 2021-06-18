@@ -21,7 +21,7 @@ const components = {
 }
 
 export default function Article(props) {
-    let { body, tags } = props;
+    let { body, tags, url } = props;
     tags = tags.map(tag => {
         return {
             name: tag
@@ -31,7 +31,16 @@ export default function Article(props) {
         <>
             <NextSeo
                 title={"暮天云光-" + props.title}
-                description={"no at this moment"}
+                description={props.description}
+                additionalMetaTags={
+                    [
+                        {
+                            property: 'keywords',
+                            name: 'keywords',
+                            content: Array.isArray(props.keywords) ? props.keywords.join(",") : ""
+                        }
+                    ]
+                }
             />
             <article>
                 <div className="container">
@@ -44,7 +53,11 @@ export default function Article(props) {
                                 >
                                     {body}
                                 </ReactMarkdown>
+                                <hr />
                             </div>
+                            <strong className={styles.remark}>
+                                <a href={url}>在github上参与本文讨论</a>
+                            </strong>
                             <Sidebar tags={tags} />
                         </div>
                     </div>

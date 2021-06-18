@@ -1,5 +1,6 @@
 const Lokka = require('lokka').Lokka;
 const Transport = require('lokka-transport-http').Transport;
+const fm = require('front-matter');
 
 const token = process.env.API_TOKEN
 
@@ -48,16 +49,17 @@ export async function getArticles(title) {
                 }
             }
         `)
-        console.log(JSON.stringify(result))
         const issues = result.repository.issues.edges.map((em) => {
             const { title, body, createdAt, url, labels } = em.node;
             const tags = labels.edges.map(em => em.node.name);
+            let json = fm(body); //提取front-matter 信息 {attributes,body}
             return {
                 title,
-                body,
+                body: json.body,
                 url,
                 createdAt,
-                tags
+                tags,
+                ...json.attributes
             }
         })
         const tags = result.repository.labels.edges.map((em) => {
@@ -67,6 +69,7 @@ export async function getArticles(title) {
                 color
             };
         })
+        console.log(issues, "===")
         return {
             issues,
             tags
