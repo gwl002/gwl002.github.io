@@ -1,1 +1,1 @@
-{"pageProps":{"title":"next-blog","body":"---\r\ndescription: some desc\r\nkeywords: \r\n- 1\r\n- 2\r\n- 3\r\n---\r\n测试写一个next-blog","url":"https://github.com/gwl002/gwl002.github.io/issues/4","createdAt":"2021-06-11T02:42:50Z","tags":["react"],"headType":"article"},"__N_SSG":true}
+{"pageProps":{"title":"next-blog","body":"测试写一个next-blog","url":"https://github.com/gwl002/gwl002.github.io/issues/4","createdAt":"2021-06-11T02:42:50Z","tags":["react"],"description":"some desc","keywords":[1,2,3],"headType":"article"},"__N_SSG":true}
