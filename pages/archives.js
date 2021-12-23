@@ -54,12 +54,12 @@ const GroupByYear = ({ year, posts }) => {
                 {posts.map((post) => {
                     let month = moment(post.createdAt).format("MM-DD")
                     return (
-                        <li key={post.title}>
+                        <li key={post.id}>
                             <span>{month}</span>
                             &nbsp;
                             <i className="fa fa-angle-double-right" aria-hidden="true"></i>
                             &nbsp;
-                            <Link href={"/article/" + post.title}>
+                            <Link href={"/article/" + post.id}>
                                 {post.title}
                             </Link>
                         </li>

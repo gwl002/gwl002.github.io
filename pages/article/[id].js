@@ -74,7 +74,7 @@ export async function getStaticPaths() {
         paths: issues.map(article => {
             return {
                 params: {
-                    title: article.title
+                    id: article.id
                 }
             }
         }),
@@ -83,9 +83,9 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    let title = params.title;
+    let id = params.id;
     let { issues } = await getArticles();
-    let props = issues.find(article => article.title === title)
+    let props = issues.find(article => article.id === id)
     return {
         props: {
             ...props,
