@@ -59,8 +59,8 @@ const GroupByTag = ({ tag, posts }) => {
             <ul className={styles.postList}>
                 {posts.map(post => {
                     return (
-                        <li key={post.title}>
-                            <Link href={"/article/" + post.title}>
+                        <li key={post.id}>
+                            <Link href={"/article/" + post.id}>
                                 <a>
                                     <h2>
                                         {post.title}
