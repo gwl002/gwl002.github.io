@@ -71,7 +71,6 @@ export async function getArticles(title) {
                 color
             };
         })
-        console.log(issues, "===")
         return {
             issues,
             tags
