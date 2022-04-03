@@ -1,32 +1,34 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
-import Link from "next/link";
-import styles from "../styles/navbar.module.scss";
-import cn from "classnames";
+import cn from 'classnames'
+import Link from 'next/link'
+import React, { useCallback, useEffect, useState } from 'react'
+import styles from '../styles/navbar.module.scss'
 
-export default function NavBar(props) {
-    const [showNav, setShowNav] = useState(false);
+const NavBar: React.FunctionComponent = () => {
+    const [showNav, setShowNav] = useState(false)
 
     const toggleShowNav = () => {
-        setShowNav(showNav => !showNav);
+        setShowNav(showNav => !showNav)
     }
 
-    const handleClick = useCallback((e) => {
-        setShowNav(false);
+    const handleClick = useCallback(e => {
+        setShowNav(false)
     }, [])
 
     useEffect(() => {
         if (showNav) {
-            window.document.addEventListener("click", handleClick)
+            window.document.addEventListener('click', handleClick)
         } else {
-            window.document.removeEventListener("click", handleClick)
+            window.document.removeEventListener('click', handleClick)
         }
-    }, [showNav])
+    }, [handleClick, showNav])
 
     return (
         <nav className={styles.navbar}>
             <div className={styles.containerFluid}>
-                <a href="/" className={styles.navbarHeader}>暮天云光</a>
-                <ul className={cn(styles.nav, { [styles.in]: showNav })} >
+                <Link href="/">
+                    <a className={styles.navbarHeader}>暮天云光</a>
+                </Link>
+                <ul className={cn(styles.nav, { [styles.in]: showNav })}>
                     <li>
                         <Link href="/">HOME</Link>
                     </li>
@@ -53,3 +55,4 @@ export default function NavBar(props) {
     )
 }
 
+export default NavBar

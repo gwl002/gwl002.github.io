@@ -1,12 +1,12 @@
-import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import React from 'react'
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === 'production'
 
 export default class MyDocument extends Document {
-    static async getInitialProps(ctx) {
-        const initialProps = await Document.getInitialProps(ctx);
-        return { ...initialProps };
+    static async getInitialProps(ctx: DocumentContext) {
+        const initialProps = await Document.getInitialProps(ctx)
+        return { ...initialProps }
     }
 
     render() {
@@ -14,7 +14,11 @@ export default class MyDocument extends Document {
             <Html>
                 <Head>
                     <link rel="shortcut icon" href="/favicon.ico?" />
-                    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+                    <link
+                        href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css"
+                        rel="stylesheet"
+                        type="text/css"
+                    />
                     {isProduction && (
                         <>
                             <script
@@ -29,7 +33,7 @@ export default class MyDocument extends Document {
                                     function gtag(){dataLayer.push(arguments);}
                                     gtag('js', new Date());
                                     gtag('config', '${process.env.GA_TRACKING_ID}');
-                                    `
+                                    `,
                                 }}
                             />
                         </>
@@ -40,6 +44,6 @@ export default class MyDocument extends Document {
                     <NextScript />
                 </body>
             </Html>
-        );
+        )
     }
 }

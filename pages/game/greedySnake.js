@@ -1,110 +1,114 @@
-import React, { useState, useEffect, memo, } from "react";
-import { interval, of, merge, fromEvent, NEVER, BehaviorSubject, combineLatest, Subject, asyncScheduler } from "rxjs";
-import { map, filter, scan, startWith, switchMap, tap, withLatestFrom, pluck, distinctUntilChanged, takeWhile, shareReplay, takeUntil, takeLast } from "rxjs/operators";
-import { useMeasure } from "react-use";
-import Head from "next/head";
+import React, { useState, useEffect, memo } from 'react'
+import { interval, of, merge, fromEvent, NEVER, BehaviorSubject, combineLatest, Subject, asyncScheduler } from 'rxjs'
+import {
+    map,
+    filter,
+    scan,
+    startWith,
+    switchMap,
+    tap,
+    withLatestFrom,
+    pluck,
+    distinctUntilChanged,
+    takeWhile,
+    shareReplay,
+    takeUntil,
+    takeLast,
+} from 'rxjs/operators'
+import { useMeasure } from 'react-use'
+import Head from 'next/head'
 
-const KEY_EVENTS_DIR = [
-    "ArrowUp",
-    "ArrowDown",
-    "ArrowLeft",
-    "ArrowRight"
-]
+const KEY_EVENTS_DIR = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight']
 
 const KEY_OPPOSITE = {
-    ArrowUp: "ArrowDown",
-    ArrowDown: "ArrowUp",
-    ArrowRight: "ArrowLeft",
-    ArrowLeft: "ArrowRight",
+    ArrowUp: 'ArrowDown',
+    ArrowDown: 'ArrowUp',
+    ArrowRight: 'ArrowLeft',
+    ArrowLeft: 'ArrowRight',
 }
 
 const INTERVAL_TIMES = [300, 200, 100, 80]
 
-
 const createFood = (size, data) => {
-    let x = Math.floor(Math.random() * size);
-    let y = Math.floor(Math.random() * size);
+    let x = Math.floor(Math.random() * size)
+    let y = Math.floor(Math.random() * size)
     if (data.some(item => item.x === x && item.y === y)) {
-        return createFood(size, data);
+        return createFood(size, data)
     }
     return { x, y }
 }
 
-const checkGameOver = (snake) => {
-    let head = snake[0];
-    return snake.slice(1).some(item => item.x === head.x && item.y === head.y);
+const checkGameOver = snake => {
+    let head = snake[0]
+    return snake.slice(1).some(item => item.x === head.x && item.y === head.y)
 }
 
-
 const App = () => {
-    const size = 20;
-    const [ref, { width }] = useMeasure();
+    const size = 20
+    const [ref, { width }] = useMeasure()
 
-    const itemWidth = width / size;
+    const itemWidth = width / size
 
     const initialState = {
         isGameOver: false,
         score: 0,
-        snake: [
-
-        ],
+        snake: [],
         food: null,
-        isPaused: true
+        isPaused: true,
     }
 
-    const [state, setState] = useState(initialState);
+    const [state, setState] = useState(initialState)
 
     const createGame = () => {
-        const gameOver$ = new BehaviorSubject(false);
+        const gameOver$ = new BehaviorSubject(false)
 
-        const keyDir$ = fromEvent(document, "keydown").pipe(
-            pluck("key"),
-            filter((key) => KEY_EVENTS_DIR.includes(key)),
-            startWith("ArrowRight"),
-            distinctUntilChanged(),
-        );
+        const keyDir$ = fromEvent(document, 'keydown').pipe(
+            pluck('key'),
+            filter(key => KEY_EVENTS_DIR.includes(key)),
+            startWith('ArrowRight'),
+            distinctUntilChanged()
+        )
 
-        const gestureDir$ = function () {
+        const gestureDir$ = (function () {
             if ('ontouchstart' in document.documentElement) {
-                return fromEvent(document, "touchstart").pipe(
-                    switchMap((startEvent) =>
-                        fromEvent(document, "touchmove").pipe(
-                            takeUntil(fromEvent(document, "touchend")),
+                return fromEvent(document, 'touchstart').pipe(
+                    switchMap(startEvent =>
+                        fromEvent(document, 'touchmove').pipe(
+                            takeUntil(fromEvent(document, 'touchend')),
                             takeLast(1),
-                            map((event) => {
-                                let deltaX = event.touches[0].pageX - startEvent.touches[0].pageX;
-                                let deltaY = event.touches[0].pageY - startEvent.touches[0].pageY;
+                            map(event => {
+                                let deltaX = event.touches[0].pageX - startEvent.touches[0].pageX
+                                let deltaY = event.touches[0].pageY - startEvent.touches[0].pageY
                                 if (deltaX > 0 && Math.abs(deltaX) > Math.abs(deltaY)) {
-                                    return KEY_EVENTS_DIR[3];
+                                    return KEY_EVENTS_DIR[3]
                                 } else if (deltaX < 0 && Math.abs(deltaX) > Math.abs(deltaY)) {
-                                    return KEY_EVENTS_DIR[2];
+                                    return KEY_EVENTS_DIR[2]
                                 } else if (deltaY > 0 && Math.abs(deltaY) > Math.abs(deltaX)) {
-                                    return KEY_EVENTS_DIR[1];
+                                    return KEY_EVENTS_DIR[1]
                                 } else {
                                     return KEY_EVENTS_DIR[0]
                                 }
-                            }),
+                            })
                         )
                     )
                 )
             }
             return NEVER
-        }()
+        })()
 
+        const dir$ = merge(keyDir$, gestureDir$)
 
-        const dir$ = merge(keyDir$, gestureDir$);
-
-        const pauseClick$ = fromEvent(document.getElementById("pauseORresume"), "click");
-        const pauseKey$ = fromEvent(document, "keydown").pipe(
-            pluck("code"),
-            filter((code) => code === "Space")
+        const pauseClick$ = fromEvent(document.getElementById('pauseORresume'), 'click')
+        const pauseKey$ = fromEvent(document, 'keydown').pipe(
+            pluck('code'),
+            filter(code => code === 'Space')
         )
         const pause$ = merge(pauseClick$, pauseKey$).pipe(
             startWith(true),
-            scan((current, prev) => current ? false : true, false)
+            scan((current, prev) => (current ? false : true), false)
         )
 
-        const eatFood$ = new BehaviorSubject([]);
+        const eatFood$ = new BehaviorSubject([])
 
         const score$ = eatFood$.pipe(
             scan((score, _) => {
@@ -114,23 +118,23 @@ const App = () => {
 
         const food$ = eatFood$.pipe(
             map(snake => createFood(size, snake)),
-            shareReplay(1),
+            shareReplay(1)
         )
 
         const inteval$ = score$.pipe(
             filter(score => score % 5 === 0),
             map(score => {
-                let level = Math.floor(score / 5);
-                level = level >= 3 ? 3 : level;
-                return INTERVAL_TIMES[level];
+                let level = Math.floor(score / 5)
+                level = level >= 3 ? 3 : level
+                return INTERVAL_TIMES[level]
             }),
             distinctUntilChanged(),
-            switchMap((time) => interval(time)),
+            switchMap(time => interval(time))
         )
 
         const snake$ = pause$.pipe(
-            switchMap((isPaused) => isPaused ? NEVER : inteval$),
-            startWith("init"),
+            switchMap(isPaused => (isPaused ? NEVER : inteval$)),
+            startWith('init'),
             withLatestFrom(dir$, food$),
             //不能反向
             scan((prev, [_, dir, food]) => {
@@ -139,44 +143,46 @@ const App = () => {
                 }
                 return [dir, food]
             }, []),
-            scan((snake, [dir, food]) => {
-                let head = snake[0];
-                let _x = head.x;
-                let _y = head.y;
-                switch (dir) {
-                    case "ArrowRight":
-                        _x = _x >= size - 1 ? 0 : _x + 1;
-                        break;
-                    case "ArrowLeft":
-                        _x = _x <= 0 ? size - 1 : _x - 1;
-                        break;
-                    case "ArrowUp":
-                        _y = _y <= 0 ? size - 1 : _y - 1;
-                        break;
-                    case "ArrowDown":
-                        _y = _y >= size - 1 ? 0 : _y + 1;
-                        break;
-                }
-                snake.unshift({ x: _x, y: _y });
-                //吃到🍎,通知更新food$
-                if (food.x === _x && food.y === _y) {
-                    eatFood$.next(snake)
-                } else {
-                    snake.pop();
-                }
-                if (checkGameOver(snake)) {
-                    gameOver$.next(true)
-                }
-                return [...snake];
-            }, [{ x: 1, y: 1 }]),
-        );
+            scan(
+                (snake, [dir, food]) => {
+                    let head = snake[0]
+                    let _x = head.x
+                    let _y = head.y
+                    switch (dir) {
+                        case 'ArrowRight':
+                            _x = _x >= size - 1 ? 0 : _x + 1
+                            break
+                        case 'ArrowLeft':
+                            _x = _x <= 0 ? size - 1 : _x - 1
+                            break
+                        case 'ArrowUp':
+                            _y = _y <= 0 ? size - 1 : _y - 1
+                            break
+                        case 'ArrowDown':
+                            _y = _y >= size - 1 ? 0 : _y + 1
+                            break
+                    }
+                    snake.unshift({ x: _x, y: _y })
+                    //吃到🍎,通知更新food$
+                    if (food.x === _x && food.y === _y) {
+                        eatFood$.next(snake)
+                    } else {
+                        snake.pop()
+                    }
+                    if (checkGameOver(snake)) {
+                        gameOver$.next(true)
+                    }
+                    return [...snake]
+                },
+                [{ x: 1, y: 1 }]
+            )
+        )
 
         const game$ = combineLatest([snake$, pause$, food$, score$, gameOver$]).pipe(
             takeWhile(([snake, isPaused, food, score, isGameOver]) => !isGameOver, true)
         )
-        return game$;
+        return game$
     }
-
 
     const renderGame = ([snake, isPaused, food, score, isGameOver]) => {
         setState(state => {
@@ -186,28 +192,25 @@ const App = () => {
                 isPaused,
                 food,
                 score,
-                isGameOver
+                isGameOver,
             }
         })
     }
 
     const startGame = () => {
-        const reset$ = fromEvent(document.getElementById("reset"), "click");
-        const game$ = merge(of("startGame"), reset$).pipe(
-            switchMap(x => createGame()),
-        )
+        const reset$ = fromEvent(document.getElementById('reset'), 'click')
+        const game$ = merge(of('startGame'), reset$).pipe(switchMap(x => createGame()))
         const sub = game$.subscribe(game => renderGame(game))
-        return sub;
+        return sub
     }
 
     useEffect(() => {
-        let sub = startGame();
+        let sub = startGame()
 
         return () => {
-            sub.unsubscribe();
+            sub.unsubscribe()
         }
     }, [])
-
 
     return (
         <>
@@ -215,14 +218,12 @@ const App = () => {
                 <link rel="stylesheet" href="/styles/greedySnake.css" />
             </Head>
             {width > 0 ? null : <Loading />}
-            <div className="snakeGame" ref={ref} style={{ visibility: width > 0 ? "visible" : "hidden" }}>
+            <div className="snakeGame" ref={ref} style={{ visibility: width > 0 ? 'visible' : 'hidden' }}>
                 <Board winWidth={width} size={size} isGameOver={state.isGameOver} />
                 <Snake itemWidth={itemWidth} data={state.snake} />
                 <Food itemWidth={itemWidth} food={state.food} />
                 <div>
-                    <button id="pauseORresume">{
-                        state.isPaused ? "START" : "PAUSE"
-                    }</button>
+                    <button id="pauseORresume">{state.isPaused ? 'START' : 'PAUSE'}</button>
                 </div>
                 <div>
                     <button id="reset">reset</button>
@@ -234,90 +235,87 @@ const App = () => {
 }
 
 const Food = ({ food, itemWidth }) => {
-    if (!food) return null;
+    if (!food) return null
 
     return (
         <span
             className="boardItem"
             style={{
-                position: "absolute",
+                position: 'absolute',
                 width: itemWidth,
                 height: itemWidth,
                 left: itemWidth * food.x,
                 top: itemWidth * food.y,
-                backgroundColor: "green"
+                backgroundColor: 'green',
             }}
         >
             <span></span>
         </span>
     )
-
 }
 
 const Snake = memo(({ data, itemWidth }) => {
     return (
         <>
-            {data.map((item, index) =>
+            {data.map((item, index) => (
                 <span
                     // key={`${item.x}-${item.y}`}
                     key={index}
                     className="boardItem"
                     style={{
-                        position: "absolute",
+                        position: 'absolute',
                         width: itemWidth,
                         height: itemWidth,
                         left: itemWidth * item.x,
                         top: itemWidth * item.y,
-                        backgroundColor: "red"
+                        backgroundColor: 'red',
                     }}
                 >
                     <span></span>
                 </span>
-            )}
+            ))}
         </>
     )
 })
 
 const GameOver = ({ isGameOver }) => {
-    if (!isGameOver) return null;
-    return (
-        <h1 className="center">GAME OVER</h1>
-    )
+    if (!isGameOver) return null
+    return <h1 className="center">GAME OVER</h1>
 }
 
 const Board = memo(({ winWidth, size, isGameOver }) => {
-    const itemWidth = winWidth / size;
+    const itemWidth = winWidth / size
 
     const Row = ({ rowIndex }) => {
         return (
             <div className="rowContainer">
-                {
-                    Array(size).fill().map((item, index) => (
+                {Array(size)
+                    .fill()
+                    .map((item, index) => (
                         <span key={index} className="boardItem" style={{ width: itemWidth, height: itemWidth }}>
                             <span></span>
                         </span>
-                    ))
-                }
+                    ))}
             </div>
         )
     }
 
     return (
         <div id="board">
-            {
-                Array(size).fill().map((item, index) => <Row key={index} />)
-            }
+            {Array(size)
+                .fill()
+                .map((item, index) => (
+                    <Row key={index} />
+                ))}
             <GameOver isGameOver={isGameOver} />
         </div>
     )
 })
 
 const Loading = () => {
-    return (
-        <div className="loading">Loading...</div>
-    )
+    return <div className="loading">Loading...</div>
 }
 
-App.layout = "none";
+App.layout = 'none'
 
-export default App;
+export default App
