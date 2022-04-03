@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import React from 'react'
+import { GetStaticProps } from 'next'
+import { PageProps } from '../types/PageProps'
 
-export default function HomePage(props) {
+export default function HomePage() {
     // const downloadPDF = async () => {
     //     let response = await fetch("/api/createPdf", {
     //         responseType: 'arraybuffer',
@@ -19,18 +21,17 @@ export default function HomePage(props) {
     return (
         <div className="container">
             <div className="column">
-                <h4 style={{ textAlign: "center" }}>暂无内容</h4>
+                <h4 style={{ textAlign: 'center' }}>暂无内容</h4>
             </div>
         </div>
     )
 }
 
-
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
     return {
         props: {
-            title: "关于",
-            subTitle: "Hi,我是Devin!"
+            title: '关于',
+            subTitle: 'Hi,我是Devin!',
         },
     }
 }
