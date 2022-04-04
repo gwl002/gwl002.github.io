@@ -20,7 +20,7 @@ export default function HomePage(props: IndexPageProps) {
     )
 }
 
-export const getStaticProps: GetStaticProps<IndexPageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<IndexPageProps> = async ({}) => {
     const result = await getArticles()
     return {
         props: {

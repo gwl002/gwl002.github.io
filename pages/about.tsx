@@ -27,7 +27,7 @@ export default function HomePage() {
     )
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<PageProps> = async ({}) => {
     return {
         props: {
             title: '关于',
