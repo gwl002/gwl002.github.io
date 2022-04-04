@@ -22,7 +22,7 @@ export default function HomePage(props: IndexPageProps) {
                 <div className="content">
                     <div className={styles.tagPage}>
                         <ul className={styles.tags}>
-                            {tags?.map((tag, index) => {
+                            {tags?.map(tag => {
                                 return (
                                     <li key={tag.name} className={styles.tag}>
                                         <a href={'#' + tag.name} style={{ backgroundColor: `#${tag.color}` }}>
@@ -34,7 +34,7 @@ export default function HomePage(props: IndexPageProps) {
                         </ul>
                         <ul>
                             {groups?.map(group => {
-                                return <GroupByTag tag={group.tag} posts={group.posts} key={group.tag.name} />
+                                return <GroupByTag tag={group.tag} posts={group.posts || []} key={group.tag.name} />
                             })}
                         </ul>
                     </div>
@@ -69,7 +69,7 @@ const GroupByTag = ({ tag, posts }: { tag: Tag; posts: Issue[] }) => {
     )
 }
 
-export const getStaticProps: GetStaticProps<IndexPageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<IndexPageProps> = async ({}) => {
     const result = await getArticles()
     return {
         props: {

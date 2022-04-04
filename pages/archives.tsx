@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react'
-import styles from '../styles/archives.module.scss'
-import { getArticles } from '../utils/api'
-import Link from 'next/link'
-import moment from 'dayjs'
 import cn from 'classnames'
-import { ArchivePageProps } from '../types/PageProps'
+import moment from 'dayjs'
 import { GetStaticProps } from 'next'
+import Link from 'next/link'
+import React from 'react'
+import styles from '../styles/archives.module.scss'
 import { Issue } from '../types/Article'
+import { ArchivePageProps } from '../types/PageProps'
+import { getArticles } from '../utils/api'
 
 export default function Archives(props: ArchivePageProps) {
     const { list } = props
@@ -66,7 +66,7 @@ const GroupByYear = ({ year, posts }: { year: number; posts: Issue[] }) => {
     )
 }
 
-export const getStaticProps: GetStaticProps<ArchivePageProps> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<ArchivePageProps> = async ({}) => {
     const result = await getArticles()
     return {
         props: {
