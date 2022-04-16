@@ -27,10 +27,12 @@ export default class MyDocument extends Document {
                     />
                     {isProduction && (
                         <>
-                            <script>
-                                window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject =
-                                function () {}
-                            </script>
+                            <script
+                                dangerouslySetInnerHTML={{
+                                    __html: `window.__REACT_DEVTOOLS_GLOBAL_HOOK__.inject
+                                =function(){}`
+                                }}
+                            />
                             {/* 删除 react_devtool_backend.js */}
                             <script
                                 async
