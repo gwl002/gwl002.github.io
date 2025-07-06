@@ -7,3 +7,67 @@
         }
     }
 }
+
+
+
+.cssTextOverflow {
+    .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+    }
+
+    .demo {
+
+        .textContainer {
+            background-color: antiquewhite;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            margin-bottom:100px;
+            width:300px;
+            height: 100px;
+            margin-left: 100px;
+            overflow: hidden;
+            color: #333;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4; // 显示3行
+            -webkit-box-orient: vertical; // 垂直方向排列
+        }
+
+        .content{
+            line-height: 25px;
+        }
+
+        .textContainer2 {
+            background-color: antiquewhite;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            margin-bottom:100px;
+            width:300px;
+            height: 100px;
+            margin-left: 100px;
+            overflow: hidden;
+            color: #333;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
+            .content{
+                margin-top: -75px;
+            }
+        }
+
+        .textContainer2::before{
+            content:'';
+            display: block;
+            height: 75px;
+
+            
+        }
+
+        .more{float:right}
+        
+    }
+}

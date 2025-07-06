@@ -23,6 +23,9 @@ export default function GamePage() {
                             </a>
                             <span>(https://github.com/jirengu-inc/animating-resume)</span>
                         </li>
+                        <li>
+                            <Link href="/game/cssTextOverflow">CSS多行文本溢出实现</Link>
+                        </li>
                     </ul>
                 </div>
             </div>

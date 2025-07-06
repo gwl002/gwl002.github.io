@@ -19,10 +19,8 @@ export default function PostItem(props: Issue) {
                         query: { id },
                     }}
                 >
-                    <a>
                         <h2 className={styles.postTitle}>{title}</h2>
                         <div className={styles.postContentPreview}>{desc.length >= 150 ? desc + '......' : desc}</div>
-                    </a>
                 </Link>
                 <p className={styles.postMeta}>Posted by gwl002 on {moment(createdAt).format('YYYY-MM-DD')}</p>
             </li>

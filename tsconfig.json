@@ -21,13 +21,14 @@
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "pages/game/greedySnake.js",
-
+    "**/*.tsx",
+    "pages/game/greedySnake.js"
   ],
   "exclude": [
     "node_modules"

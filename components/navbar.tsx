@@ -25,8 +25,8 @@ const NavBar: React.FunctionComponent = () => {
     return (
         <nav className={styles.navbar}>
             <div className={styles.containerFluid}>
-                <Link href="/">
-                    <a className={styles.navbarHeader}>暮天云光</a>
+                <Link href="/" className={styles.navbarHeader}>
+                    暮天云光
                 </Link>
                 <ul className={cn(styles.nav, { [styles.in]: showNav })}>
                     <li>

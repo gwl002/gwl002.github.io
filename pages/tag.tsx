@@ -56,9 +56,7 @@ const GroupByTag = ({ tag, posts }: { tag: Tag; posts: Issue[] }) => {
                     return (
                         <li key={post.id}>
                             <Link href={'/article/' + post.id}>
-                                <a>
-                                    <h2>{post.title}</h2>
-                                </a>
+                                <h2>{post.title}</h2>
                             </Link>
                             <hr />
                         </li>
