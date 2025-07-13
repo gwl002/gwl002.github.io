@@ -8,7 +8,7 @@ export default function SideBar(props: { tags: Tag[] | undefined }) {
         <div className={styles.sidebar}>
             <section>
                 <h5>
-                    <Link href="/tags">FEATURED TAGS</Link>
+                    <Link href="/tags" ><a>FEATURED TAGS</a></Link>
                 </h5>
                 <ul className={styles.tags}>
                     {tags?.map((tag, index) => {
@@ -24,7 +24,7 @@ const TagItem = (props: { tag: Tag }) => {
     const { tag } = props
     return (
         <li className={styles.tag}>
-            <Link href={`/tag#${tag.name}`}>{tag.name}</Link>
+            <Link href={`/tag#${tag.name}`} ><a>{tag.name}</a></Link>
         </li>
     )
 }

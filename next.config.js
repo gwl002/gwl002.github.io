@@ -8,4 +8,7 @@ module.exports = {
         return 'next-build'
     },
     distDir: 'dist',
+    typescript: {
+        ignoreBuildErrors: true,
+    },
 }

@@ -16,8 +16,8 @@ const Header = (props: HeaderProps) => {
                                 <div className={styles.tags}>
                                     {tags.map(tag => {
                                         return (
-                                            <Link href={`/tag#${tag.name}`} key={tag as React.Key}>
-                                                {tag.name}
+                                            <Link href={`/tag#${tag.name}`} key={tag.name}>
+                                                <a>{tag.name}</a>
                                             </Link>
                                         )
                                     })}

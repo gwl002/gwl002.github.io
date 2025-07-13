@@ -9,7 +9,8 @@
     "start": "next start",
     "export": "next export",
     "generate": "next build && next-sitemap && next export",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@octokit/graphql": "^9.0.1",
@@ -46,16 +47,19 @@
   },
   "homepage": "https://github.com/gwl002/gwl002.github.io#readme",
   "devDependencies": {
+    "@eslint/js": "^9.30.1",
+    "@next/eslint-plugin-next": "^15.3.5",
     "@octokit/graphql-schema": "^15.26.0",
     "@types/md5": "^2.3.2",
     "@types/react": "^19.1.8",
-     "eslint": "^9.30.1",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "eslint": "^9.30.1",
     "eslint-config-next": "^15.3.5",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
-    "@types/react-syntax-highlighter": "^15.5.13",
-    "@typescript-eslint/eslint-plugin": "^8.35.1",
     "prettier": "^3.6.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^7.7.1"
   }
 }
