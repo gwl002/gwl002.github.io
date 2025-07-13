@@ -7,6 +7,7 @@ module.exports = {
     generateBuildId: async () => {
         return 'next-build'
     },
+    output:'export',
     distDir: 'dist',
     typescript: {
         ignoreBuildErrors: true,
