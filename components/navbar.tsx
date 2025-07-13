@@ -25,24 +25,24 @@ const NavBar: React.FunctionComponent = () => {
     return (
         <nav className={styles.navbar}>
             <div className={styles.containerFluid}>
-                <Link href="/" >
-                    <a className={styles.navbarHeader}>暮天云光</a>
+                <Link href="/" className={styles.navbarHeader}>
+                    暮天云光
                 </Link>
                 <ul className={cn(styles.nav, { [styles.in]: showNav })}>
                     <li>
-                        <Link href="/" ><a>HOME</a></Link>
+                        <Link href="/" >HOME</Link>
                     </li>
                     <li>
-                        <Link href="/about" ><a>关于</a></Link>
+                        <Link href="/about" >关于</Link>
                     </li>
                     <li>
-                        <Link href="/game" ><a>小游戏</a></Link>
+                        <Link href="/game" >小游戏</Link>
                     </li>
                     <li>
-                        <Link href="/archives" ><a>归档</a></Link>
+                        <Link href="/archives" >归档</Link>
                     </li>
                     <li>
-                        <Link href="/tag" ><a>标签</a></Link>
+                        <Link href="/tag" >标签</Link>
                     </li>
                 </ul>
                 <button className={styles.navToggle} id="nav-toggle" onClick={toggleShowNav}>

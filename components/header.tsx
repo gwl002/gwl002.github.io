@@ -17,7 +17,7 @@ const Header = (props: HeaderProps) => {
                                     {tags.map(tag => {
                                         return (
                                             <Link href={`/tag#${tag.name}`} key={tag.name}>
-                                                <a>{tag.name}</a>
+                                                {tag.name}
                                             </Link>
                                         )
                                     })}
