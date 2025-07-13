@@ -20,6 +20,7 @@ jobs:
         API_TOKEN: ${{secrets.API_TOKEN}}
         GA_TRACKING_ID: ${{secrets.GA_TRACKING_ID}}
     - name: install pnpm
+      run: npm install -g pnpm
     - name: Install and Build
       run: |
         pnpm install
