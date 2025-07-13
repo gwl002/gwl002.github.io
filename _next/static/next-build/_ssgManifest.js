@@ -1,1 +1,1 @@
-self.__SSG_MANIFEST=new Set(["\u002Fabout","\u002Farchives","\u002Fgame","\u002F","\u002Ftag","\u002Farticle\u002F[id]"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
+self.__SSG_MANIFEST=new Set(["\u002F","\u002Fabout","\u002Farchives","\u002Farticle\u002F[id]","\u002Fgame","\u002Ftag"]);self.__SSG_MANIFEST_CB&&self.__SSG_MANIFEST_CB()
